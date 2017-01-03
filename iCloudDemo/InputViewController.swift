@@ -43,7 +43,7 @@ class InputViewController: UIViewController,UITextViewDelegate,CloudManagerDeleg
             if currentDiary != nil{
                 let date = Date()
                 let dateF = DateFormatter()
-                dateF.dateFormat = "yyyy-MM-dd HH:MM"
+                dateF.dateFormat = "yyyy-MM-dd HH:mm"
                 diary.name = dateF.string(from: date)
                 currentDiary = diary
                 if diaryClosure != nil{

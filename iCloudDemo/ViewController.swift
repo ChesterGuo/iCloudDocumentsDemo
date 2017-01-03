@@ -82,7 +82,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
     let item = dataArray[indexPath.row] as? Diary
-    cell.textLabel?.text = item?.creatTimestamp
+    cell.textLabel?.text = item?.content
     return cell
 }
 func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{

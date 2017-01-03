@@ -23,7 +23,7 @@ class Diary: NSObject {
         self.content = content
         self.creatTimestamp = String(timestamp)
         let dateF = DateFormatter()
-        dateF.dateFormat = "yyyy-MM-dd HH:MM"
+        dateF.dateFormat = "yyyy-MM-dd HH:mm"
         self.name = dateF.string(from: date)
     }
     init(dic:Dictionary<String, Any>){

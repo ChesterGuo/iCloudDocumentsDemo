@@ -25,17 +25,18 @@ class CloudDocumentsManager: NSObject {
     }
 
     func save(diaries:Array<Diary>){
-        var dataList = Array<Dictionary<String, Any>>()
-        for diary in diaries {
-            let dic = diary.convertToDictionary()
-            dataList.append(dic)
-        }
-        var url = self.iCloudDocumentURL()
-        url = url?.appendingPathComponent("saveData")
-        let document = XDocument(fileURL: url!)
-        document.open { (success) in
-            if(success){
-                if document.diaries.count > 0{
+        let baseURL = self.iCloudDocumentURL()
+        if baseURL != nil{
+            var dataList = Array<Dictionary<String, Any>>()
+            for diary in diaries {
+                let dic = diary.convertToDictionary()
+                dataList.append(dic)
+            }
+            var url = self.iCloudDocumentURL()
+            url = url?.appendingPathComponent("saveData")
+            let document = XDocument(fileURL: url!)
+            document.open { (success) in
+                if(success){
                     document.diaries = dataList
                     document.save(to: url!, for: .forOverwriting) { (success) in
                         if success{
@@ -43,14 +44,13 @@ class CloudDocumentsManager: NSObject {
                             document.close(completionHandler: nil)
                         }
                     }
-
-                }
-            }else{
-                document.diaries = dataList
-                document.save(to: url!, for: .forCreating) { (success) in
-                    if success{
-                        print("Creat success")
-                        document.close(completionHandler: nil)
+                }else{
+                    document.diaries = dataList
+                    document.save(to: url!, for: .forCreating) { (success) in
+                        if success{
+                            print("Creat success")
+                            document.close(completionHandler: nil)
+                        }
                     }
                 }
             }
