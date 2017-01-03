@@ -62,6 +62,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 let selectedDiary = individual as! Diary
                 if selectedDiary.creatTimestamp == item?.creatTimestamp  {
                     self.dataArray[index] = diary
+                    self.cloudManager.save(diaries: self.dataArray as! Array<Diary>)
                 }
             }
             self.tableView?.reloadData()
