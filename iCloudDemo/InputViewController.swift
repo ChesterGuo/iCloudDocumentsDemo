@@ -41,6 +41,10 @@ class InputViewController: UIViewController,UITextViewDelegate,CloudManagerDeleg
         if textView.text.lengthOfBytes(using: .utf8) > 0{
             let diary = Diary(content: textView.text)
             if currentDiary != nil{
+                let date = Date()
+                let dateF = DateFormatter()
+                dateF.dateFormat = "yyyy-MM-dd HH:MM"
+                diary.name = dateF.string(from: date)
                 currentDiary = diary
                 if diaryClosure != nil{
                     diaryClosure!(currentDiary)

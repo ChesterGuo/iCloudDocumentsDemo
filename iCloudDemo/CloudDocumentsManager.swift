@@ -34,15 +34,17 @@ class CloudDocumentsManager: NSObject {
         url = url?.appendingPathComponent("saveData")
         let document = XDocument(fileURL: url!)
         document.open { (success) in
-            if document.diaries.count > 0{
-                document.diaries = dataList
-                document.save(to: url!, for: .forOverwriting) { (success) in
-                    if success{
-                        print("Overwrit success")
-                        document.close(completionHandler: nil)
+            if(success){
+                if document.diaries.count > 0{
+                    document.diaries = dataList
+                    document.save(to: url!, for: .forOverwriting) { (success) in
+                        if success{
+                            print("Overwrit success")
+                            document.close(completionHandler: nil)
+                        }
                     }
-                }
 
+                }
             }else{
                 document.diaries = dataList
                 document.save(to: url!, for: .forCreating) { (success) in
@@ -51,7 +53,6 @@ class CloudDocumentsManager: NSObject {
                         document.close(completionHandler: nil)
                     }
                 }
-
             }
         }
     }
